@@ -87,6 +87,7 @@ int main()
     cout<<a1.getBuilding()<<endl;
     a2.getCity();
     a2.setCity("Pune");
+    cout<<a2.getCity()<<endl;
 
 
     return 0;
