@@ -2,7 +2,6 @@
 using namespace std;
 #define SIZE 5
 
-
 class Stack
 {
 private:
@@ -28,62 +27,59 @@ public:
 
     void push(int a)
     {
-        if(this->top == this->size-1)
+        if (this->top == this->size - 1)
         {
-            cout<<"Stack is full"<<endl;
+            cout << "Stack is full" << endl;
         }
         else
         {
             this->top++;
-            this->arr[top]=a;
+            this->arr[top] = a;
         }
-
     }
 
     void pop()
     {
-        if(this->top==-1)
-            cout<<"Stack is Empty"<<endl;
+        if (this->top == -1)
+            cout << "Stack is Empty" << endl;
         else
         {
-            this->arr[top]=0;
+            this->arr[top] = 0;
             top--;
         }
     }
 
     void peek()
     {
-        if (this->top==-1)
+        if (this->top == -1)
         {
-            cout<<"Stack is empty"<<endl;
-
+            cout << "Stack is empty" << endl;
         }
         else
         {
-            cout<<"Peeked Value is:"<<this->arr[top]<<endl;
-
+            cout << "Peeked Value is:" << this->arr[top] << endl;
         }
     }
 
     void isEmpty()
     {
-        if(this->top==-1)
-            cout<<"Stack is Empty"<<endl;
-        else    
-            cout<<"Stack is not Empty"<<endl;
+        if (this->top == -1)
+            cout << "Stack is Empty" << endl;
+        else
+            cout << "Stack is not Empty" << endl;
     }
 
     void isFull()
     {
-        if(this->top==(this->size)-1)
-            cout<<"Stack is Full"<<endl;
-        else    
-            cout<<"Stack is Empty:"<<endl;
+        if (this->top == (this->size) - 1)
+            cout << "Stack is Full" << endl;
+        else
+            cout << "Stack is Empty:" << endl;
     }
 
     ~Stack()
     {
-        cout<<"Inside DTOR";
+        cout << "Inside DTOR";
         delete[] arr;
     }
 };
@@ -92,8 +88,8 @@ int main()
 {
 
     int size;
-    cout<<"Enter the size of Stack:";
-    cin>>size;
+    cout << "Enter the size of Stack:";
+    cin >> size;
     Stack s(size);
     s.isEmpty();
     s.isFull();
@@ -101,9 +97,6 @@ int main()
     s.isEmpty();
     s.peek();
     s.pop();
-
-
-    
 
     return 0;
 }
