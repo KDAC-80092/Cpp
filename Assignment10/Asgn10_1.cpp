@@ -1,164 +1,144 @@
 #include <iostream>
+
 using namespace std;
-#define SIZE 5
 
 template <class T>
 class Stack
 {
+private:
     int size;
     int top;
     T *arr;
 
 public:
-    Stack(int size)
+    Stack() : size(5), top(0)
     {
-        this->top = -1;
-        if (size > 0)
-        {
-            this->size = size;
-            this->arr = new T[size];
-        }
+        arr = new T[size];
+    }
+
+    void push(T element)
+    {
+        if (isFull())
+            cout << "Stack is full" << endl;
         else
         {
-            this->size = SIZE;
-            this->arr = new T[SIZE];
+            arr[top] = element;
+            top++;
         }
     }
 
-    void push(T a)
+    bool isFull()
     {
-        if (this->top == this->size - 1)
-        {
-            cout << "Stack is Full!" << endl;
-        }
-        else
-        {
-            this->top++;
-            this->arr[top] = a;
-            cout << "Element Added Successfully!" << endl;
-        }
+        if (top == size)
+            return true;
+        return false;
     }
 
     void pop()
     {
-        if (this->top == -1)
-        {
-            cout << "Stack is Empty!" << endl;
-        }
+        if (isEmpty())
+            cout << "Stack is empty!!!" << endl;
         else
         {
-            this->arr[top];
-            this->top--;
-            cout << "Element Removed Successfully!" << endl;
+            // arr[top]=0;
+            --top;
         }
     }
 
-    void peek()
+    bool isEmpty()
     {
-        if (this->top == -1)
-        {
-            cout << "Stack is Empty!" << endl;
-        }
-        else
-        {
-            cout << "Element is:" << this->arr[top] << endl;
-        }
+        if (top == 0)
+            return true;
+        return false;
     }
 
-    void isEmpty()
+    T peek()
     {
-        if (this->top == -1)
-        {
-            cout << "Stack Is Empty." << endl;
-        }
-        else
-        {
-            cout << "Space available in Stack." << endl;
-        }
+        return arr[top - 1];
     }
 
-    void isFull()
+    void displayStack()
     {
-        if (this->top == size - 1)
+        int trav = top - 1;
+        while (trav >= 0)
         {
-            cout << "Stack is Full." << endl;
+            cout << arr[trav] << endl;
+            trav--;
         }
-        else
-        {
-            cout << "Stack is  not Full." << endl;
-        }
+    }
+    ~Stack()
+    {
+        delete[] arr;
     }
 };
 
 class Box
 {
+private:
     int length;
     int breadth;
     int height;
 
 public:
-    Box()
+    Box() : length(1), breadth(1), height(1)
     {
-        this->length = 1;
-        this->breadth = 2;
-        this->height = 3;
     }
-    Box(int l, int b, int h)
+    Box(int length, int breadth, int height)
     {
-        this->length = length;
         this->breadth = breadth;
+        this->length = length;
         this->height = height;
     }
-    void display()
+    void calculateVolume()
     {
-        cout << "Length = " << length << "Breadth = " << breadth << "Height = " << height << endl;
-    }
-
-    friend std::ostream &operator<<(ostream &os, Box &box)
-    {
-        os << box.length << box.breadth << box.height;
-        return os;
+        cout << "Volume:" << this->length * this->breadth * this->height << endl;
     }
 };
 
 int main()
 {
-    // int size;
-    // cout<<"Enter size of stack:";
-    // cin>>size;
-    // Stack<int> s(5);
-    // s.push(10);
-    // s.push(20);
-    // s.peek();
-    // s.isEmpty();
-    // s.isFull();
-    // s.pop();
-    // s.peek();
-    // cout << "*************************************************";
-    // Stack<double> s1(5);
-    // s1.push(10.00);
-    // s1.push(20.20);
-    // s1.peek();
-    // s1.isEmpty();
-    // s1.isFull();
-    // s1.pop();
-    // s1.peek();
+    Stack<int> s;
+    s.push(1);
+    s.push(2);
+    s.push(3);
+    s.push(4);
+    s.push(5);
+    s.displayStack();
 
-    Stack<Box> boxStack(5);
-    Box box1(10, 20, 30);
-    Box box2(5, 6, 7);
+    Stack<double> s1;
+    s1.push(1.2);
+    s1.push(2.3);
+    s1.push(3.4);
+    s1.push(4.5);
+    s1.push(5.6);
+    s1.displayStack();
+    s1.pop();
+    s1.pop();
+    s1.pop();
+    s1.pop();
+    s1.pop();
+    s1.pop();
+    s1.pop();
+    cout << "After poping" << endl;
+    s1.displayStack();
 
-    boxStack.push(box1);
-    boxStack.push(box2);
+    Stack<Box> b;
+    b.push(Box(2, 2, 2));
+    b.push(Box(3, 3, 3));
+    b.push(Box(4, 4, 4));
+    b.push(Box(5, 5, 5));
+    b.push(Box(6, 6, 6));
 
-    cout << "***************************" << endl;
-    boxStack.peek();
-
-    cout << "****************************" << endl;
-    boxStack.pop();
-
-    cout << "****************************" << endl;
-
-    boxStack.peek();
-    return 0;
+    b.peek().calculateVolume();
+    b.pop();
+    b.peek().calculateVolume();
+    b.pop();
+    b.peek().calculateVolume();
+    b.pop();
+    b.peek().calculateVolume();
+    b.pop();
+    b.peek().calculateVolume();
+    b.pop();
+    b.peek().calculateVolume();
+    b.pop();
 }
